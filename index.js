@@ -1,4 +1,5 @@
 const TelegramBot = require("node-telegram-bot-api");
+const http = require('http')
 require("dotenv").config();
 const token = process.env.BOT_TOKEN;
 console.log(token)
@@ -38,3 +39,12 @@ bot.on("message", (msg) => {
   console.log(msg);
   console.log("----------------------------");
 });
+
+const PORT = process.env.PORT || 3000
+
+http.createServer((req,res)=>{
+  if (req.url === "/" && req.method === "GET") {
+    res.writeHead(404, { "Content-Type": "text/html" });
+    res.end("<h1>Hello</h1>");
+  }
+}).listen(PORT)
