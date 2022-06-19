@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
+    "start": "node index.js",
     "watch": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "node-cron": "^3.0.1",
+    "node-fetch": "^3.2.6",
     "node-telegram-bot-api": "^0.57.0"
   },
   "devDependencies": {
