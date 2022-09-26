@@ -39,6 +39,7 @@ async function getting() {
 }
 
 bot.on("message", (msg) => {
+  console.log(msg);
   if (
     msg.text.toString().toLowerCase().includes("post") &&
     msg.from.id === parseInt(myID)
@@ -48,7 +49,7 @@ bot.on("message", (msg) => {
 });
 
 // Emmits message event according to schedule
-cron.schedule("23 * * * *", () => {
+cron.schedule("*/10 * * * *", () => {
   console.log("running a task every three minutes");
   bot.emit("message", {
     message_id: 261,
