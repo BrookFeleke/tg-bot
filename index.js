@@ -2,6 +2,9 @@ require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 var cron = require("node-cron");
 const axios = require("axios");
+const port = 8888;
+const express = require("express");
+const app = express();
 
 const token = process.env.BOT_TOKEN;
 console.log(token);
@@ -62,3 +65,10 @@ cron.schedule("*/10 * * * *", () => {
     text: "Post",
   });
 });
+
+app.get('/',(req,res)=>{
+  res.json({message: "Yes this is working"});
+})
+
+
+app.listen(process.env.PORT || port);
