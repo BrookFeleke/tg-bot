@@ -1,6 +1,7 @@
 // https://github.com/yagop/node-telegram-bot-api/issues/319#issuecomment-324963294
 // Fixes an error with Promise cancellation
 const TelegramBot = require("node-telegram-bot-api");
+const token = process.env.BOT_TOKEN;
 const axios = require("axios");
 process.env.NTBA_FIX_319 = "test";
 const bot = new TelegramBot(token, { polling: true });
