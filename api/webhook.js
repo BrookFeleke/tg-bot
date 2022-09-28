@@ -13,9 +13,9 @@ module.exports = async (request, response) => {
         // that the Botfather gave us
         // Use an environment variable so we don't expose it in our code
         const bot = new TelegramBot(process.env.BOT_TOKEN);
-
         // Retrieve the POST request body that gets sent from Telegram
         const { body } = request;
+        console.log(body.message);
 
         // Ensure that this is a message being sent
         if (body.message) {
@@ -47,3 +47,4 @@ module.exports = async (request, response) => {
 
 
 
+// curl -X POST https://api.telegram.org/bot5405520582:AAFZdK0ZqeIdxTbRHMKolKwox493tB0Tnls/setWebhook -H "Content-type: application/json" -d '{"url": "https://dad-joke-bot.vercel.app/api/webhook"}'
