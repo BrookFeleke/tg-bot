@@ -1,12 +1,12 @@
 // https://github.com/yagop/node-telegram-bot-api/issues/319#issuecomment-324963294
 // Fixes an error with Promise cancellation
+const TelegramBot = require("node-telegram-bot-api");
 const axios = require("axios");
 process.env.NTBA_FIX_319 = "test";
 const bot = new TelegramBot(token, { polling: true });
 const channelID = process.env.CHANEL_ID;
 const myID = process.env.MY_ID;
 // Require our Telegram helper package
-const TelegramBot = require("node-telegram-bot-api");
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
