@@ -43,6 +43,7 @@ console.log(response);
 // Export as an asynchronous function
 // We'll wait until we've responded to the user
 module.exports = async (request, response) => {
+    console.log(process.env.PORT);
   try {
     // Create our new bot handler with the token
     // that the Botfather gave us
