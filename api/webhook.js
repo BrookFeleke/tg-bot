@@ -68,8 +68,8 @@ module.exports = async (request, response) => {
       } = body.message;
 
       if (
-        message.text.toString().toLowerCase().includes("post") &&
-        message.from.id === parseInt(myID)
+        text.toString().toLowerCase().includes("post") &&
+        id === parseInt(myID)
       ) {
         getting();
       } else {
