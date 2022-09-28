@@ -21,7 +21,7 @@ const   getting= async() => {
   console.log(randomTime, "--------------------");
   try {
       const  response = await axios.get(`https://www.reddit.com/r/dadjokes/top.json?t=${randomTime}`)
-console.log("Response");
+console.log(response);
     for (let i = 0; i < 3; i++) {
       let randomPost = getRandom(
         0,
@@ -65,7 +65,7 @@ module.exports = async (request, response) => {
         text.toString().toLowerCase().includes("post") &&
         id === parseInt(myID)
       ) {
-        getting();
+        await getting();
       } else {
         // Create a message to send back
         // We can use Markdown inside this
