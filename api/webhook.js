@@ -15,30 +15,24 @@ function getRandom(min, max) {
 const type = ["top", "hot", "new"];
 const time = ["day", "week", "year"];
 
-async function getting() {
+const   getting= async() => {
   const randomTime = time[getRandom(0, time.length)];
   const randomType = type[getRandom(0, type.length)];
   console.log(randomTime, "--------------------");
-  let response;
   try {
-    await axios
-      .get(`https://www.reddit.com/r/dadjokes/top.json?t=${randomTime}`)
-      .then((result) => {
-        response = result;
-      })
-      .catch(console.log("there was an error"));
-
+      const  response = await axios.get(`https://www.reddit.com/r/dadjokes/top.json?t=${randomTime}`)
+console.log("Response");
     for (let i = 0; i < 3; i++) {
       let randomPost = getRandom(
         0,
         response["data"]["data"]["children"].length
       );
       const joke =
-        response["data"]["data"]["children"][randomPost]["data"]["title"];
+       await response["data"]["data"]["children"][randomPost]["data"]["title"];
       const punchLine =
-        response["data"]["data"]["children"][randomPost]["data"]["selftext"];
-      await bot.sendMessage(channelID, `${joke}  \n\n ${punchLine}`);
-      await bot.sendMessage(myID, `${joke}  \n\n ${punchLine}`);
+        await response["data"]["data"]["children"][randomPost]["data"]["selftext"];
+      await bot.sendMessage(channelID, `${joke}  \n\n ${punchLine}`,{ parse_mode: "Markdown" });
+      await bot.sendMessage(myID, `${joke}  \n\n ${punchLine}`,{ parse_mode: "Markdown" });
     }
   } catch (error) {
     console.error("Error sending message");
