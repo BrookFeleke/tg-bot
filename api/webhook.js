@@ -4,7 +4,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const token = process.env.BOT_TOKEN;
 const axios = require("axios");
 process.env.NTBA_FIX_319 = "test";
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token);
 const channelID = process.env.CHANEL_ID;
 const myID = process.env.MY_ID;
 // Require our Telegram helper package
