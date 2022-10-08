@@ -8,12 +8,35 @@ const bot = new TelegramBot(token);
 const channelID = process.env.CHANEL_ID;
 const myID = process.env.MY_ID;
 // Require our Telegram helper package
-
+// https://api.dictionaryapi.dev/api/v2/entries/en/<word>
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 const type = ["top", "hot", "new"];
 const time = ["day", "week", "year"];
+
+const getDefinition = async (word)=> {
+  try {
+    const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    const b = await result.json()
+    console.log(b)
+    const firstDef = await b[0];
+    const resultword = await firstDef.word;
+    const pronounce = await firstDef.phonetic
+    let meanings = `${resultword} \n${pronounce} \n`;
+      firstDef.meanings.forEach(m => {
+        meanings += `(${m.partOfSpeech}):`
+        m.definitions.forEach((d,i)=>{
+          meanings += `${i+1}. ${d.definition} \n\nEx. ${d.example? d.example:"------------"} \n\n`
+        })
+      });
+      console.log(meanings)
+      await bot.sendMessage(myID,meanings)
+  } catch (error) {
+    console.log(error);
+    await bot.sendMessage(myID, `${error.message} there was an error loser`)
+  }
+  }
 
 const   getting= async() => {
   const randomTime = time[getRandom(0, time.length)];
@@ -67,10 +90,15 @@ module.exports = async (request, response) => {
         id === parseInt(myID)
       ) {
         await getting();
+      } else if(text.toString().toLowerCase().includes("define") &&
+      id === parseInt(myID)){
+        let word = text.slice(text.indexOf(":")+1);
+        word = word.trim();
+        await getDefinition(word)
       } else {
         // Create a message to send back
         // We can use Markdown inside this
-        const message = `✅ Thanks for your message: *"${text}"*\nHave a great day! 👋🏻`;
+        const message = `✅ Thanks for your message: *"${text}"*\nHave a great day! loser 👋🏻`;
 
         // Send our new message back in Markdown and
         // wait for the request to finish
