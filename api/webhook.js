@@ -17,8 +17,8 @@ const time = ["day", "week", "year"];
 
 const getDefinition = async (word)=> {
   try {
-    const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-    const b = await result.json()
+    const result = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    const b = await result
     console.log(b)
     const firstDef = await b[0];
     const resultword = await firstDef.word;
